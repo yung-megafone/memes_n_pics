@@ -1,8 +1,11 @@
 name: Update README Image Gallery
 
 on:
+  workflow_dispatch:
+
   push:
     paths:
+      - "img/**"
       - "*.jpg"
       - "*.jpeg"
       - "*.png"
