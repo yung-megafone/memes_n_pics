@@ -6,12 +6,6 @@ on:
   push:
     paths:
       - "img/**"
-      - "*.jpg"
-      - "*.jpeg"
-      - "*.png"
-      - "*.gif"
-      - "*.webp"
-      - "*.bmp"
       - ".github/workflows/update-readme.yml"
       - "README.md"
 
@@ -36,15 +30,18 @@ jobs:
 
           image_exts = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 
+          img_dir = Path("img")
+          img_dir.mkdir(exist_ok=True)
+
           images = sorted(
-              p for p in Path("img").iterdir()
+              p for p in img_dir.iterdir()
               if p.is_file() and p.suffix.lower() in image_exts
           )
 
           gallery = []
           for img in images:
-              name = img.name
-              gallery.append(f'<img src="{name}" width="300" alt="{name}">')
+              src = img.as_posix()
+              gallery.append(f'<img src="{src}" width="300" alt="{img.name}">')
 
           new_section = start + "\n\n" + "\n\n".join(gallery) + "\n\n" + end
 
