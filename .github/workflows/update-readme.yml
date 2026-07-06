@@ -34,7 +34,7 @@ jobs:
           image_exts = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 
           images = sorted(
-              p for p in Path("/img").iterdir()
+              p for p in Path("img").iterdir()
               if p.is_file() and p.suffix.lower() in image_exts
           )
 
